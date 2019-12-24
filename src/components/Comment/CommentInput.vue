@@ -27,7 +27,9 @@ export default {
   methods: {
     set_height(h) {
       this.height = h
-      this.current_comment.name = ''
+      if (h === 2) {
+        this.current_comment.name = ''
+      }
     },
   },
   computed: {

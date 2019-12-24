@@ -1,18 +1,17 @@
 <template>
   <section>
-    <ul v-for="comment in comments" :key="comment.id" class="cover-comment">
-      <li :id="comment.id" class="comment">
-        <!-- FIXME: 记得换 url 格式 -->
-        <img :src="base_url + comment.user_id + '.png'" alt="" class="avatar" />
+    <ul v-for="comment in comments" :key="comment.comment_id" class="cover-comment">
+      <li :id="comment.comment_id" class="comment">
+        <img :src="comment.avatar" alt="" class="avatar" />
         <div style="width: 100%">
           <p>{{ comment.username }}</p>
-          <p v-if="comment.reply_name">
+          <p v-if="comment.reply_id">
             回复：
-            <span class="reply_name">{{ comment.reply_name }}</span>
+            <span class="reply_name">{{ comment.reply_username }}</span>
           </p>
-          <p>{{ comment.body }}</p>
+          <p>{{ comment.content }}</p>
           <p class="stat">
-            <span>{{ comment.id | Id2Time }}</span>
+            <span>{{ comment.comment_id | Id2Time }}</span>
             <span class="state-img">
               <img :src="like_svg" alt="" />
               <img :src="reply_svg" alt="" @click="click_comment(comment)" />
@@ -39,7 +38,6 @@ export default {
   },
   data() {
     return {
-      base_url: 'http://192.168.1.106:8000/avatar/', // FIXME: 发布时修改
       reply_svg,
       like_svg,
       info: {},
