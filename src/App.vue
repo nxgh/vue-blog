@@ -4,17 +4,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'app',
-  created() {
-    this.$store.dispatch('user/request_auth_token')
-  },
-}
-</script>
-
-<style>
-body,
+<style lang="less">
 #app {
   height: 100%;
 }

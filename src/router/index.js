@@ -1,75 +1,42 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import findLast from 'lodash/findLast'
-
-import NotFound from '@/views/Exception/404'
-import Forbidden from '@/views/Exception/403'
-import ServerError from '@/views/Exception/500'
-
-import { check, is_login } from '@/utils/auth'
+import store from '../store'
+import { getToken } from '@/utils/auth'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'index',
-    component: () => import('@/views/Terminal/Terminal.vue'),
+    name: 'home',
+    component: () => import('@/views/Home/index'),
   },
   {
-    path: '/blog',
-    component: () => import('@/views/Home/Home.vue'),
-    children: [
-      {
-        path: '/blog',
-        name: 'article-list',
-        component: () => import('@/components/ArticleList/ArticleList.vue'),
-      },
-      {
-        path: '/article/:id',
-        name: 'article-detail',
-        component: () => import('@/components/ArticleDetail/ArticleDetail.vue'),
-      },
-      {
-        path: '/category',
-        name: 'category',
-        component: () => import('@/components/Category/Category.vue'),
-      },
-    ],
+    path: '/post/:id',
+    name: 'detail',
+    component: () => import('@/views/Detail/index'),
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/login',
     name: 'login',
-    meta: { authority: ['anon'] },
-    component: () => import('@/views/Auth/AuthDialog.vue'),
+    component: () => import('@/views/Login'),
   },
   {
-    path: '/writer',
-    name: 'writer',
+    path: '/admin',
+    name: 'admin',
     meta: { authority: ['admin'] },
-    component: () => import('@/views/Writer/Writer.vue'),
-    children: [
-      {
-        path: '/writer/:id',
-        name: 'editor',
-        component: () => import('@/components/Writer/Editor.vue'),
-      },
-    ],
-  },
-  {
-    path: '*',
-    name: '404',
-    component: NotFound,
+    children: [],
+    component: () => import('@/views/Admin'),
   },
   {
     path: '/403',
     name: '403',
-    component: Forbidden,
-  },
-  {
-    path: '/500',
-    name: '500',
-    component: ServerError,
+    component: () => import('@/views/Exception/403.vue'),
   },
 ]
 
@@ -79,17 +46,22 @@ const router = new VueRouter({
   routes,
 })
 router.beforeEach((to, from, next) => {
-  const record = findLast(to.matched, record => record.meta.authority)
-  if (record && !check(record.meta.authority)) {
-    if (!is_login() && to.path !== '/login') {
-      next({
-        path: '/login',
+  const record = to.matched.filter(item => item.meta.authority)
+  if (record.length !== 0 && !getToken() !== '') {
+    // 需要验证的路由
+    console.log(`需要验证`)
+    store
+      .dispatch('actAuthToken')
+      .then(res => {
+        console.log(`验证成功`, res)
+        next()
       })
-    } else if (to.path !== '/403') {
-      next({
-        path: '/403',
+      .catch(err => {
+        console.log(`验证失败`, err)
+        next({
+          path: '/login',
+        })
       })
-    }
   } else {
     next()
   }

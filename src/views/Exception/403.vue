@@ -1,15 +1,9 @@
 <template>
-  <div>I’m 403 Exception: <Exception /></div>
+  <div>403</div>
 </template>
 
 <script>
-import Exception from './Exception'
-
-export default {
-  components: {
-    Exception,
-  },
-}
+export default {}
 </script>
 
 <style></style>
