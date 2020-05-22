@@ -16,4 +16,7 @@ module.exports = {
       patterns: [path.resolve(__dirname, 'src/assets/css/GlobalVariable.less')],
     },
   },
+  devServer: {
+    proxy: 'http://localhost:7300/mock/5ec721b5e5045c0026a808c7/blog/'
+  }
 }
