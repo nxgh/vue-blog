@@ -2,10 +2,11 @@
 
 ## 项目截图
 
-![](https://github.com/nxgh/vue-blog/blob/master/screenshot/index.png)
-![](https://github.com/nxgh/vue-blog/blob/master/screenshot/detail.png)
-![](https://github.com/nxgh/vue-blog/blob/master/screenshot/login.png)
-![](https://github.com/nxgh/vue-blog/blob/master/screenshot/editor.png)
+<img src="https://github.com/nxgh/vue-blog/blob/master/screenshot/index.png">
+<img src="https://github.com/nxgh/vue-blog/blob/master/screenshot/detail.png">
+<img src="https://github.com/nxgh/vue-blog/blob/master/screenshot/login.png">
+<img src="https://github.com/nxgh/vue-blog/blob/master/screenshot/editor.png">
+
 
 ## Project setup
 
