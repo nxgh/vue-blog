@@ -2,10 +2,10 @@
 
 ## 项目截图
 
-![](./screenshot/index.png)
-![](./screenshot/detail.png)
-![](./screenshot/login.png)
-![](./screenshot/editor.png)
+![](https://github.com/nxgh/vue-blog/blob/master/screenshot/index.png)
+![](https://github.com/nxgh/vue-blog/blob/master/screenshot/detail.png)
+![](https://github.com/nxgh/vue-blog/blob/master/screenshot/login.png)
+![](https://github.com/nxgh/vue-blog/blob/master/screenshot/editor.png)
 
 ## Project setup
 
